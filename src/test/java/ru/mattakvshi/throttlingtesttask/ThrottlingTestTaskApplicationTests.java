@@ -165,7 +165,7 @@ class ThrottlingTestTaskApplicationTests {
         int totalRequests = numberOfIPs * requestsPerIP;
 
         for (int i = 0; i < totalRequests; i++) {
-            final String ip = "192.168.0." + (i % numberOfIPs);  // Генерация IP-адресов
+            String ip = "192.168.0." + (i % numberOfIPs);  // Генерация IP-адресов
             synchronized (ipRequestCount) {
                 ipRequestCount.put(ip, ipRequestCount.getOrDefault(ip, 0) + 1);
             }
@@ -194,12 +194,11 @@ class ThrottlingTestTaskApplicationTests {
         Map<String, List<ResultActions>> ipResults = new HashMap<>();
 
         for (int i = 0; i < results.size(); i++) {
-            final String ip = "192.168.0." + (i % numberOfIPs);
+            String ip = "192.168.0." + (i % numberOfIPs);
             ipResults.computeIfAbsent(ip, k -> new ArrayList<>()).add(results.get(i));
         }
 
         for (Map.Entry<String, List<ResultActions>> entry : ipResults.entrySet()) {
-            String ip = entry.getKey();
             List<ResultActions> ipResultList = entry.getValue();
 
             for (int i = 0; i < ipResultList.size(); i++) {

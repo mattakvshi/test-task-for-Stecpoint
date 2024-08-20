@@ -30,7 +30,7 @@ public class RateLimiter {
 
         Queue<Long> times = requestTimes.computeIfAbsent(ip, q -> new ConcurrentLinkedQueue<>());
 
-        logger.info(requestTimes + "");
+        logger.info(requestTimes.toString());
 
         synchronized (times) {
             while (!times.isEmpty() && now - times.peek() > TIME_INTERVAL) {
